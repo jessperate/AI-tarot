@@ -153,11 +153,27 @@
     .compare-detail p { margin:0; font-size:13px; line-height:1.55; }
     .compare-select-label { display:block; margin-top:17px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
     .compare-select { display:block; width:100%; margin-top:7px; padding:10px 12px; border:1px solid #9f9198; border-radius:5px; background:#fffdf7; color:var(--ink); font:500 13px/1.3 Inter,Arial,sans-serif; }
+    .compare-readout[hidden] { display:none; }
+    .compare-readout { margin-top:24px; padding:27px; border:2px solid var(--ink); border-radius:10px; background:#f8f4e9; box-shadow:6px 7px 0 rgba(139,85,185,.2); }
+    .compare-readout-heading { display:flex; align-items:baseline; flex-wrap:wrap; gap:10px 24px; margin-bottom:21px; }
+    .compare-readout h3 { margin:0; font:normal clamp(30px,3.7vw,45px)/1 Ashcroft,Georgia,serif; }
+    .compare-readout-heading p { margin:0; font-size:13px; line-height:1.5; }
+    .compare-table { width:100%; border-collapse:collapse; table-layout:fixed; text-align:left; }
+    .compare-table th,.compare-table td { padding:14px 17px; border:1px solid #c9bfc3; vertical-align:top; overflow-wrap:anywhere; }
+    .compare-table thead th { background:var(--ink); color:#fffaf0; font-size:12px; line-height:1.35; }
+    .compare-table thead th:first-child { width:145px; }
+    .compare-table tbody th { background:#eae0e9; font-size:11px; letter-spacing:.09em; text-transform:uppercase; }
+    .compare-table tbody td { background:#fffdf7; font-size:13px; line-height:1.5; }
+    .compare-table tbody td:nth-child(2) { border-left:4px solid var(--green); }
+    .compare-table tbody td:nth-child(3) { border-left:4px solid var(--purple); }
+    .compare-takeaway { display:grid; grid-template-columns:145px 1fr 1fr; gap:16px; margin-top:19px; padding:18px; background:var(--green); clip-path:polygon(0 0,100% 1%,99% 100%,0 98%); }
+    .compare-takeaway strong { font-size:11px; letter-spacing:.1em; text-transform:uppercase; }
+    .compare-takeaway p { margin:0; font-size:13px; line-height:1.45; }
     footer { padding:18px 0 38px; border-top:1px solid rgba(27,22,24,.25); font-size:12px; line-height:1.4; color:#62595c; }
     @media (hover:hover) and (pointer:fine) { .tarot-card:hover .card-inner { transform:rotateY(180deg); } }
     @media (max-width:1050px) { .grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; } }
-    @media (max-width:720px) { .wrap { width:min(100% - 28px,1280px); } header { padding-top:34px; } .brief-box { flex-direction:column; } .brief-submit { min-width:0; min-height:48px; } .route-dialog { width:calc(100% - 20px); max-height:94dvh; padding:18px 20px 30px; box-shadow:5px 6px 0 rgba(27,22,24,.25); } .route-thinking { min-height:340px; } .rec-card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; } .rec-steps { grid-template-columns:1fr; gap:10px; } .rec-steps li { min-height:0; } .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; } .group { padding-top:32px; } .compare-board { grid-template-columns:1fr; } .compare-content { grid-template-columns:minmax(0,190px) minmax(0,1fr); } .compare-empty,.compare-content { min-height:300px; } .platform-back { padding:7%; border-width:5px; } .platform-back-top { padding-bottom:5%; } .platform-back-tag { margin-top:5%; } .platform-back-when { margin-top:4%; padding-top:4%; } }
-    @media (max-width:420px) { .rec-card-grid { grid-template-columns:1fr; max-width:320px; margin-inline:auto; } .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; } .platform-grid { grid-template-columns:1fr; gap:18px; } .compare-content { grid-template-columns:1fr; } .compare-content .tarot-card { width:min(100%,230px); } .compare-empty { min-height:250px; } .card-inner,.card-face { border-radius:5px; } .platform-title img { height:57px; } .platform-front-label img { height:43px; } .platform-back { padding:8%; } .platform-back-top img { width:32px; height:32px; } .platform-back-top strong { font-size:26px; } .platform-back-tag { font-size:11px; } .platform-back-copy,.platform-back-models,.platform-back-when { font-size:13px; line-height:1.4; } .platform-back-url { font-size:12px; } }
+    @media (max-width:720px) { .wrap { width:min(100% - 28px,1280px); } header { padding-top:34px; } .brief-box { flex-direction:column; } .brief-submit { min-width:0; min-height:48px; } .route-dialog { width:calc(100% - 20px); max-height:94dvh; padding:18px 20px 30px; box-shadow:5px 6px 0 rgba(27,22,24,.25); } .route-thinking { min-height:340px; } .rec-card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; } .rec-steps { grid-template-columns:1fr; gap:10px; } .rec-steps li { min-height:0; } .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; } .group { padding-top:32px; } .compare-board { grid-template-columns:1fr; } .compare-content { grid-template-columns:minmax(0,190px) minmax(0,1fr); } .compare-empty,.compare-content { min-height:300px; } .compare-readout { padding:19px; } .compare-table thead th:first-child { width:92px; } .compare-table th,.compare-table td { padding:10px; } .compare-takeaway { grid-template-columns:1fr 1fr; } .compare-takeaway strong { grid-column:1/-1; } .platform-back { padding:7%; border-width:5px; } .platform-back-top { padding-bottom:5%; } .platform-back-tag { margin-top:5%; } .platform-back-when { margin-top:4%; padding-top:4%; } }
+    @media (max-width:420px) { .rec-card-grid { grid-template-columns:1fr; max-width:320px; margin-inline:auto; } .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; } .platform-grid { grid-template-columns:1fr; gap:18px; } .compare-content { grid-template-columns:1fr; } .compare-content .tarot-card { width:min(100%,230px); } .compare-empty { min-height:250px; } .compare-table thead th:first-child { width:75px; } .compare-table tbody td { font-size:12px; } .compare-takeaway { grid-template-columns:1fr; clip-path:none; } .card-inner,.card-face { border-radius:5px; } .platform-title img { height:57px; } .platform-front-label img { height:43px; } .platform-back { padding:8%; } .platform-back-top img { width:32px; height:32px; } .platform-back-top strong { font-size:26px; } .platform-back-tag { font-size:11px; } .platform-back-copy,.platform-back-models,.platform-back-when { font-size:13px; line-height:1.4; } .platform-back-url { font-size:12px; } }
     @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .card-inner { transition:none; } .crystal-orb,.crystal-orb::before,.crystal-orb::after,.crystal-scene .spark { animation:none; } }
   </style>
 </head>
@@ -222,6 +238,18 @@
         <div class="compare-content" hidden></div>
         <label class="compare-select-label" for="compare-select-1">Or choose a card</label><select class="compare-select" id="compare-select-1"><option value="">Choose a card…</option></select>
       </div>
+    </div>
+    <div class="compare-readout" id="compare-readout" hidden>
+      <div class="compare-readout-heading"><h3>The difference, at a glance</h3><p>Read across each row to see where each card fits.</p></div>
+      <table class="compare-table">
+        <thead><tr><th scope="col">Compare</th><th scope="col" id="compare-name-0"></th><th scope="col" id="compare-name-1"></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">What it is</th><td id="compare-type-0"></td><td id="compare-type-1"></td></tr>
+          <tr><th scope="row">Best for</th><td id="compare-strength-0"></td><td id="compare-strength-1"></td></tr>
+          <tr><th scope="row">Use it when</th><td id="compare-when-0"></td><td id="compare-when-1"></td></tr>
+        </tbody>
+      </table>
+      <div class="compare-takeaway"><strong>The short version</strong><p id="compare-pick-0"></p><p id="compare-pick-1"></p></div>
     </div>
     <p class="sr-only" id="compare-status" role="status" aria-live="polite"></p>
   </section>
@@ -332,10 +360,13 @@
     const compareSlots = [...document.querySelectorAll('.compare-slot')];
     const compareChoices = new Map();
     const compareSelections = [null,null];
-    for (const group of groups) for (const [slug,label] of group.cards) compareChoices.set(`model:${slug}`,{label,description:cardCopy[slug],selector:`[data-slug="${slug}"]`});
+    for (const group of groups) for (const [slug,label] of group.cards) {
+      const [,strength,when] = cardCopy[slug].match(/^Great for (.+)\. Use when: (.+)$/);
+      compareChoices.set(`model:${slug}`,{label,type:`${group.title} model`,strength,when,description:cardCopy[slug],selector:`[data-slug="${slug}"]`});
+    }
     for (const platform of platforms) {
       const slug = platform.name.toLowerCase().replaceAll(' ','-');
-      compareChoices.set(`platform:${slug}`,{label:platform.name,description:`${platform.about} Models to try: ${platform.models}. Use when: ${platform.when}`,selector:`[data-platform="${slug}"]`});
+      compareChoices.set(`platform:${slug}`,{label:platform.name,type:'Creative platform',strength:platform.about,when:platform.when,description:`${platform.about} Models to try: ${platform.models}. Use when: ${platform.when}`,selector:`[data-platform="${slug}"]`});
     }
     function cardKey(card) { return card.dataset.slug ? `model:${card.dataset.slug}` : card.dataset.platform ? `platform:${card.dataset.platform}` : null; }
     function renderCompareSlot(index) {
@@ -359,6 +390,20 @@
       const copy = document.createElement('p'); copy.textContent = choice.description;
       detail.append(heading,copy); content.append(card,detail);
     }
+    function updateCompareReadout() {
+      const readout = document.getElementById('compare-readout');
+      if (compareSelections.some(key => !key)) { readout.hidden = true; return; }
+      compareSelections.forEach((key,index) => {
+        const choice = compareChoices.get(key);
+        document.getElementById(`compare-name-${index}`).textContent = choice.label;
+        document.getElementById(`compare-type-${index}`).textContent = choice.type;
+        document.getElementById(`compare-strength-${index}`).textContent = choice.strength;
+        document.getElementById(`compare-when-${index}`).textContent = choice.when;
+        const phrase = (choice.type === 'Creative platform' ? choice.strength : choice.strength.split(',')[0]).replace(/\.$/,'');
+        document.getElementById(`compare-pick-${index}`).textContent = `Pick ${choice.label} for ${phrase.charAt(0).toLowerCase()}${phrase.slice(1)}.`;
+      });
+      readout.hidden = false;
+    }
     function chooseCompare(index,key,scroll = false) {
       if (key && !compareChoices.has(key)) return;
       if (key) {
@@ -367,6 +412,7 @@
       }
       compareSelections[index] = key || null;
       renderCompareSlot(index);
+      updateCompareReadout();
       document.getElementById('compare-status').textContent = key ? `${compareChoices.get(key).label} added to card ${index + 1}.` : `Card ${index + 1} removed.`;
       if (scroll) document.getElementById('comparison').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',block:'start'});
     }
