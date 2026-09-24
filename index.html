@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="A visual field guide to the AI models creatives should know and the platforms where they can try them. Flip each card to explore.">
+  <title>The Creative's AI Model Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2309ea00'/%3E%3Cpath d='M32 9v46M9 32h46M16 16l32 32M48 16 16 48' stroke='%23150f13' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <style>
+    @font-face { font-family:Ashcroft; src:url('assets/fonts/AshcroftTest-Medium.otf') format('opentype'); font-display:swap; }
+    :root { color-scheme: light; --ink:#1b1618; --paper:#f6f2e8; --green:#16ee0a; --purple:#8b55b9; }
+    * { box-sizing:border-box; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:Inter,Arial,sans-serif; }
+    body::before { content:""; display:block; height:12px; background:linear-gradient(90deg,var(--green) 0 62%,var(--purple) 62% 100%); }
+    .wrap { width:min(100% - 40px,1280px); margin-inline:auto; }
+    header { padding:56px 0 48px; border-bottom:1px solid rgba(27,22,24,.25); text-align:center; }
+    h1 { display:flex; flex-wrap:wrap; justify-content:center; align-items:baseline; gap:0 12px; max-width:100%; margin:0; line-height:1; font-weight:normal; }
+    h1 img { display:block; width:auto; height:clamp(66px,8.8vw,112px); max-width:100%; object-fit:contain; object-position:center; }
+    .intro { margin-top:22px; }
+    .intro p { max-width:660px; margin:0 auto; font-size:clamp(.98rem,1.35vw,1.1rem); line-height:1.5; }
+    .brief-form { max-width:830px; margin:35px auto 0; text-align:left; }
+    .brief-form label { display:block; margin-bottom:12px; font-size:14px; font-weight:700; letter-spacing:.01em; }
+    .brief-box { display:flex; align-items:stretch; gap:12px; padding:10px; border:1.5px solid var(--ink); border-radius:11px; background:#fffdf7; box-shadow:5px 6px 0 rgba(139,85,185,.24); }
+    .brief-box:focus-within { outline:3px solid var(--purple); outline-offset:3px; }
+    .brief-box textarea { display:block; flex:1; min-width:0; min-height:74px; padding:10px 8px; border:0; outline:0; resize:vertical; background:transparent; color:var(--ink); font:400 16px/1.45 Inter,Arial,sans-serif; }
+    .brief-box textarea::placeholder { color:#756c70; opacity:1; }
+    .brief-submit { flex:none; align-self:stretch; min-width:182px; padding:13px 18px; border:0; border-radius:7px; background:var(--green); color:var(--ink); cursor:pointer; font:700 14px/1.25 Inter,Arial,sans-serif; }
+    .brief-submit:hover { background:#45fa39; }
+    .brief-submit:focus-visible,.brief-examples button:focus-visible,.rec-refine:focus-visible { outline:3px solid var(--purple); outline-offset:3px; }
+    .brief-examples { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px; margin-top:18px; }
+    .brief-examples span { margin-right:3px; color:#655b5e; font-size:12px; }
+    .brief-examples button { padding:7px 11px; border:1px solid #b8adaf; border-radius:99px; background:transparent; color:var(--ink); cursor:pointer; font:500 12px/1.3 Inter,Arial,sans-serif; }
+    .brief-examples button:hover { border-color:var(--purple); background:#eee3f4; }
+    body.route-open { overflow:hidden; }
+    .route-dialog { width:min(1040px,calc(100% - 32px)); max-width:none; max-height:min(90dvh,950px); margin:auto; padding:28px 42px 46px; border:2px solid var(--ink); border-radius:12px; background:var(--paper); color:var(--ink); box-shadow:12px 14px 0 rgba(27,22,24,.25); overflow-y:auto; }
+    .route-dialog::backdrop { background:rgba(26,17,35,.72); backdrop-filter:blur(5px); }
+    .route-dialog::before { content:""; position:absolute; top:0; left:0; right:0; height:9px; background:linear-gradient(90deg,var(--green) 0 62%,var(--purple) 62%); }
+    .route-close { position:sticky; z-index:5; top:0; display:grid; place-items:center; width:42px; height:42px; margin-left:auto; border:1.5px solid var(--ink); border-radius:50%; background:#fffdf7; color:var(--ink); cursor:pointer; font:normal 26px/1 Inter,Arial,sans-serif; }
+    .route-close:hover { background:var(--green); }
+    .route-close:focus-visible { outline:3px solid var(--purple); outline-offset:3px; }
+    .route-thinking[hidden],.recommendations[hidden] { display:none; }
+    .route-thinking { min-height:390px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 15px 35px; text-align:center; }
+    .crystal-scene { position:relative; width:210px; height:228px; margin:0 auto 17px; }
+    .crystal-orb { position:absolute; z-index:2; top:8px; left:25px; width:160px; height:160px; overflow:hidden; border:3px solid var(--ink); border-radius:50%; background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.85) 0 6%,transparent 24%),radial-gradient(circle at 70% 71%,rgba(22,238,10,.55) 0 12%,transparent 54%),linear-gradient(135deg,rgba(139,85,185,.72),rgba(255,255,255,.55) 48%,rgba(139,85,185,.85)); box-shadow:inset -13px -13px 0 rgba(74,33,101,.17),8px 10px 0 rgba(139,85,185,.2); animation:orb-glow 1.2s ease-in-out infinite alternate; }
+    .crystal-orb::before { content:""; position:absolute; inset:-35%; background:repeating-linear-gradient(12deg,transparent 0 17px,rgba(255,250,240,.22) 18px 29px,transparent 30px 44px); transform:rotate(-25deg); animation:orb-drift 2.4s linear infinite; }
+    .crystal-orb::after { content:"✳"; position:absolute; inset:0; display:grid; place-items:center; color:#21191e; font:normal 65px/1 Georgia,serif; text-shadow:2px 2px #fffdf7; animation:orb-turn 2s ease-in-out infinite; }
+    .crystal-neck { position:absolute; z-index:1; top:151px; left:69px; width:74px; height:26px; border:2px solid var(--ink); background:#f7efdc; clip-path:polygon(13% 0,87% 0,100% 100%,0 100%); }
+    .crystal-base { position:absolute; z-index:3; bottom:27px; left:48px; width:115px; height:27px; border:2px solid var(--ink); border-radius:50% 50% 7px 7px; background:var(--purple); box-shadow:0 9px 0 var(--ink); }
+    .crystal-scene .spark { position:absolute; color:var(--ink); font:normal 30px/1 Georgia,serif; animation:spark-pop 1.2s ease-in-out infinite alternate; }
+    .crystal-scene .spark.one { left:0; top:43px; }
+    .crystal-scene .spark.two { right:0; top:72px; animation-delay:.4s; }
+    .crystal-scene .spark.three { right:23px; top:0; font-size:22px; animation-delay:.8s; }
+    .thinking-title { margin:0; font:normal clamp(28px,3.5vw,42px)/1.1 Georgia,serif; }
+    .thinking-note { margin:12px 0 0; color:#62595c; font-size:14px; line-height:1.5; }
+    .recommendations { padding:0 0 10px; }
+    @keyframes orb-glow { from { filter:saturate(.85); } to { filter:saturate(1.4) brightness(1.08); } }
+    @keyframes orb-drift { to { transform:translate(24px,-18px) rotate(-25deg); } }
+    @keyframes orb-turn { 50% { transform:rotate(24deg) scale(1.09); } }
+    @keyframes spark-pop { to { opacity:.38; transform:scale(.75) rotate(25deg); } }
+    .rec-heading { margin:0; line-height:1; }
+    .rec-heading img { display:block; width:auto; height:clamp(40px,4vw,54px); max-width:100%; object-fit:contain; }
+    .rec-eyebrow { margin:20px 0 6px; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#62595c; }
+    .rec-name { margin:0; font:normal clamp(28px,3vw,42px)/1.08 Georgia,serif; letter-spacing:-.035em; }
+    .rec-summary { max-width:760px; margin:12px 0 0; font-size:15px; line-height:1.55; }
+    .rec-brief { max-width:760px; margin:18px 0 0; padding-left:14px; border-left:4px solid var(--purple); color:#62595c; font-size:13px; line-height:1.45; overflow-wrap:anywhere; }
+    .rec-platform-link { display:inline-block; margin-top:18px; color:var(--ink); font-size:14px; font-weight:700; text-underline-offset:4px; }
+    .rec-platform-link:focus-visible,.rec-all:focus-visible { outline:3px solid var(--purple); outline-offset:3px; }
+    .rec-card-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; max-width:940px; margin:35px 0 0; }
+    .rec-card-label { display:block; margin:0 0 10px; font-size:11px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; }
+    .rec-steps { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:15px; max-width:940px; margin:35px 0 0; padding:0; list-style:none; }
+    .rec-steps li { min-height:128px; padding:18px; background:#fffdf7; border:1px solid #d8cfcb; border-radius:7px; font-size:13px; line-height:1.5; }
+    .rec-steps .step-number { display:block; margin-bottom:10px; color:#7540a6; font-size:12px; font-weight:700; letter-spacing:.12em; }
+    .rec-foot { display:flex; align-items:center; flex-wrap:wrap; gap:10px 20px; margin:24px 0 0; }
+    .rec-foot p { flex-basis:100%; margin:0; color:#62595c; font-size:12px; line-height:1.45; }
+    .rec-all { color:var(--ink); font-size:13px; font-weight:700; text-underline-offset:3px; }
+    .rec-refine { padding:0; border:0; background:transparent; color:#7540a6; cursor:pointer; font:700 13px/1.4 Inter,Arial,sans-serif; text-decoration:underline; text-underline-offset:3px; }
+    main { padding:8px 0 72px; }
+    .group { padding-top:42px; }
+    .group + .group { margin-top:20px; border-top:1px solid rgba(27,22,24,.18); }
+    .group-head { margin:0 0 21px; }
+    .group h2 { margin:0; line-height:1; font-weight:normal; }
+    .group h2 img { display:block; width:auto; height:clamp(37px,3.8vw,49px); max-width:100%; object-fit:contain; }
+    .grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px; }
+    .tarot-card { display:block; width:100%; aspect-ratio:2/3; padding:0; border:0; border-radius:9px; background:transparent; cursor:pointer; perspective:1200px; -webkit-tap-highlight-color:transparent; }
+    .tarot-card:focus-visible { outline:4px solid var(--purple); outline-offset:5px; }
+    .deck-card-item { min-width:0; }
+    .compare-add { display:block; width:100%; margin-top:9px; padding:8px 6px; border:1px solid transparent; border-radius:5px; background:transparent; color:#5f4274; cursor:pointer; font:700 12px/1.3 Inter,Arial,sans-serif; text-align:center; }
+    .compare-add:hover { border-color:var(--purple); background:#eee3f4; }
+    .compare-add:focus-visible { outline:3px solid var(--purple); outline-offset:2px; }
+    .tarot-card.is-dragging { opacity:.45; }
+    .card-inner { position:relative; display:block; width:100%; height:100%; transform-style:preserve-3d; transition:transform .62s cubic-bezier(.2,.68,.2,1); border-radius:9px; box-shadow:0 8px 18px rgba(47,32,43,.11),0 1px 3px rgba(47,32,43,.12); }
+    .tarot-card[aria-pressed="true"] .card-inner { transform:rotateY(180deg); }
+    .card-face { position:absolute; inset:0; display:block; overflow:hidden; border-radius:9px; backface-visibility:hidden; -webkit-backface-visibility:hidden; background:#eee; }
+    .card-face img { display:block; width:100%; height:100%; object-fit:cover; }
+    .face-back { transform:rotateY(180deg); }
+    .platform-front { --ground:#26e81c; --letter:#21191e; position:absolute; isolation:isolate; background:var(--ground); color:var(--letter); font-family:Inter,Arial,sans-serif; }
+    .platform-front.tone-purple { --ground:#9364ba; --letter:#fffaf0; }
+    .platform-front.tone-cream { --ground:#f9f5e9; --letter:#21191e; }
+    .platform-front::before,.platform-back::before { content:""; position:absolute; inset:0; pointer-events:none; opacity:.15; background-image:radial-gradient(#21191e .45px,transparent .7px); background-size:5px 5px; mix-blend-mode:multiply; }
+    .platform-title { position:absolute; z-index:3; inset:0 0 auto; height:24%; display:flex; justify-content:center; align-items:flex-start; padding:9% 8% 0; }
+    .platform-title img { width:auto; max-width:100%; height:48px; max-height:100%; object-fit:contain; }
+    .platform-cut { position:absolute; display:block; left:8%; top:32%; width:87%; height:44%; transform:rotate(-7deg); background:rgba(255,250,240,.7); clip-path:polygon(0 4%,7% 0,16% 4%,28% 0,41% 3%,54% 0,64% 3%,75% 0,88% 4%,100% 0,97% 19%,100% 34%,97% 49%,100% 64%,97% 82%,100% 98%,87% 95%,75% 100%,62% 96%,49% 100%,36% 96%,23% 100%,12% 96%,0 100%,3% 82%,0 67%,3% 48%,0 29%); }
+    .platform-gridpaper { position:absolute; display:block; right:5%; top:42%; width:62%; height:33%; transform:rotate(11deg); background:repeating-linear-gradient(0deg,transparent 0 18px,rgba(32,26,32,.17) 19px 20px),repeating-linear-gradient(90deg,transparent 0 18px,rgba(32,26,32,.17) 19px 20px),#f8f2e4; clip-path:polygon(2% 0,100% 2%,98% 100%,0 97%); box-shadow:0 2px 5px #251a2122; }
+    .platform-disc { position:absolute; display:block; left:6%; top:49%; width:47%; aspect-ratio:1; border-radius:50%; background:#21191e; opacity:.77; transform:rotate(-15deg); }
+    .platform-disc::after { content:""; position:absolute; inset:19%; border:2px solid #f5f0e6; border-radius:50%; }
+    .platform-logo-sticker { position:absolute; z-index:2; left:50%; top:54%; width:49%; aspect-ratio:1; display:grid; place-items:center; transform:translate(-50%,-50%) rotate(6deg); background:#fffaf0; box-shadow:3px 5px 0 rgba(32,25,31,.24); clip-path:polygon(3% 0,98% 3%,100% 98%,1% 100%); }
+    .platform-logo-sticker img { width:73%; height:73%; object-fit:contain; }
+    .platform-spark { position:absolute; z-index:3; font:normal 36px/1 Georgia,serif; }
+    .platform-spark.one { top:31%; left:11%; transform:rotate(-10deg); }
+    .platform-spark.two { right:11%; bottom:24%; transform:rotate(19deg); }
+    .platform-front-label { position:absolute; z-index:3; display:grid; place-items:center; left:0; right:0; bottom:0; height:17%; background:#fffaf0; }
+    .platform-front-label img { width:auto; max-width:88%; height:36px; max-height:65%; object-fit:contain; }
+    .platform-back { position:absolute; display:flex; flex-direction:column; padding:8.5% 8%; background:#f9f5e9; color:#21191e; text-align:left; font-family:Inter,Arial,sans-serif; border:8px solid var(--ground,#26e81c); }
+    .platform-back.tone-purple { --ground:#9364ba; }
+    .platform-back.tone-cream { --ground:#e8dfcc; }
+    .platform-back > * { position:relative; z-index:1; }
+    .platform-back-top { display:flex; align-items:center; gap:9px; border-bottom:1px solid #21191e80; padding-bottom:8%; }
+    .platform-back-top img { width:32px; height:32px; object-fit:contain; }
+    .platform-back-top strong { font:normal clamp(20px,1.9vw,27px)/1 Georgia,serif; }
+    .platform-back-tag { margin:9% 0 2%; font-size:clamp(9px,.8vw,11px); letter-spacing:.13em; text-transform:uppercase; font-weight:700; }
+    .platform-back-copy { margin:0; font-size:clamp(11px,1vw,13px); line-height:1.42; }
+    .platform-back-models { margin:0; font-size:clamp(11px,.95vw,13px); line-height:1.45; font-weight:600; }
+    .platform-back-when { margin:7% 0 0; padding-top:7%; border-top:1px solid #21191e80; font-size:clamp(11px,.95vw,13px); line-height:1.4; }
+    .platform-back-url { margin-top:auto; padding-top:7%; font-size:clamp(10px,.85vw,12px); font-weight:700; letter-spacing:.04em; }
+    .platform-note { margin:24px 0 0; font-size:13px; line-height:1.5; color:#62595c; }
+    .platform-links { display:flex; flex-wrap:wrap; gap:8px 18px; margin:13px 0 0; font-size:13px; font-weight:600; }
+    .platform-links a { color:#251d29; text-underline-offset:3px; }
+    .platform-links a:focus-visible { outline:3px solid var(--purple); outline-offset:3px; }
+    .hint { margin:32px 0 0; font-size:13px; line-height:1.4; color:#62595c; }
+    .comparison { margin-bottom:70px; padding-top:47px; border-top:1px solid rgba(27,22,24,.25); }
+    .compare-eyebrow { margin:0 0 8px; font-size:11px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
+    .comparison h2 { margin:0; font:normal clamp(38px,5.1vw,64px)/1 Ashcroft,Georgia,serif; }
+    .compare-intro { max-width:650px; margin:12px 0 28px; font-size:14px; line-height:1.55; }
+    .compare-board { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+    .compare-slot { min-width:0; padding:19px; border:2px dashed #a58caa; border-radius:10px; background:#fffaf0; transition:background .15s,border-color .15s; }
+    .compare-slot.is-over { border-color:var(--ink); background:#ddfbd8; }
+    .compare-slot-head { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:32px; margin-bottom:16px; }
+    .compare-slot-head strong { font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
+    .compare-clear { padding:4px; border:0; background:transparent; color:#7540a6; cursor:pointer; font:700 12px/1.2 Inter,Arial,sans-serif; text-decoration:underline; text-underline-offset:3px; }
+    .compare-clear[hidden],.compare-content[hidden],.compare-empty[hidden] { display:none; }
+    .compare-clear:focus-visible,.compare-select:focus-visible { outline:3px solid var(--purple); outline-offset:2px; }
+    .compare-empty { display:grid; place-items:center; min-height:370px; border:1px solid #d9cddd; background:repeating-linear-gradient(0deg,transparent 0 18px,rgba(139,85,185,.08) 19px 20px),repeating-linear-gradient(90deg,transparent 0 18px,rgba(139,85,185,.08) 19px 20px),#f8f3ed; text-align:center; }
+    .compare-empty span { max-width:180px; font:normal 27px/1.1 Ashcroft,Georgia,serif; }
+    .compare-content { display:grid; grid-template-columns:minmax(0,220px) minmax(0,1fr); gap:22px; align-items:start; min-height:370px; }
+    .compare-content .tarot-card { max-width:220px; }
+    .compare-detail h3 { margin:4px 0 12px; font:normal clamp(24px,2.5vw,33px)/1.08 Ashcroft,Georgia,serif; }
+    .compare-detail p { margin:0; font-size:13px; line-height:1.55; }
+    .compare-select-label { display:block; margin-top:17px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+    .compare-select { display:block; width:100%; margin-top:7px; padding:10px 12px; border:1px solid #9f9198; border-radius:5px; background:#fffdf7; color:var(--ink); font:500 13px/1.3 Inter,Arial,sans-serif; }
+    footer { padding:18px 0 38px; border-top:1px solid rgba(27,22,24,.25); font-size:12px; line-height:1.4; color:#62595c; }
+    @media (hover:hover) and (pointer:fine) { .tarot-card:hover .card-inner { transform:rotateY(180deg); } }
+    @media (max-width:1050px) { .grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; } }
+    @media (max-width:720px) { .wrap { width:min(100% - 28px,1280px); } header { padding-top:34px; } .brief-box { flex-direction:column; } .brief-submit { min-width:0; min-height:48px; } .route-dialog { width:calc(100% - 20px); max-height:94dvh; padding:18px 20px 30px; box-shadow:5px 6px 0 rgba(27,22,24,.25); } .route-thinking { min-height:340px; } .rec-card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; } .rec-steps { grid-template-columns:1fr; gap:10px; } .rec-steps li { min-height:0; } .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; } .group { padding-top:32px; } .compare-board { grid-template-columns:1fr; } .compare-content { grid-template-columns:minmax(0,190px) minmax(0,1fr); } .compare-empty,.compare-content { min-height:300px; } .platform-back { padding:7%; border-width:5px; } .platform-back-top { padding-bottom:5%; } .platform-back-tag { margin-top:5%; } .platform-back-when { margin-top:4%; padding-top:4%; } }
+    @media (max-width:420px) { .rec-card-grid { grid-template-columns:1fr; max-width:320px; margin-inline:auto; } .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; } .platform-grid { grid-template-columns:1fr; gap:18px; } .compare-content { grid-template-columns:1fr; } .compare-content .tarot-card { width:min(100%,230px); } .compare-empty { min-height:250px; } .card-inner,.card-face { border-radius:5px; } .platform-title img { height:57px; } .platform-front-label img { height:43px; } .platform-back { padding:8%; } .platform-back-top img { width:32px; height:32px; } .platform-back-top strong { font-size:26px; } .platform-back-tag { font-size:11px; } .platform-back-copy,.platform-back-models,.platform-back-when { font-size:13px; line-height:1.4; } .platform-back-url { font-size:12px; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .card-inner { transition:none; } .crystal-orb,.crystal-orb::before,.crystal-orb::after,.crystal-scene .spark { animation:none; } }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <h1 aria-label="The creative's AI model deck"><img src="assets/headlines/the-creatives.png" alt=""><img src="assets/headlines/ai-model-deck-upright.png" alt=""></h1>
+    <div class="intro">
+      <p>Tell us what you're making. We'll point you to a platform, the model cards worth trying, and a place to start.</p>
+    </div>
+    <form class="brief-form" id="brief-form">
+      <label for="brief-input">What are you trying to create?</label>
+      <div class="brief-box">
+        <textarea id="brief-input" name="brief" rows="2" maxlength="500" required placeholder="A 30-second launch video with sound, a pitch deck, a set of social graphics…"></textarea>
+        <button class="brief-submit" type="submit">Find my creative route ✳</button>
+      </div>
+      <div class="brief-examples" aria-label="Example briefs">
+        <span>Try an example:</span>
+        <button type="button" data-example="A pitch deck for a new product">Pitch deck</button>
+        <button type="button" data-example="A 30-second product video with sound">Video with sound</button>
+        <button type="button" data-example="Social graphics with precise text and a consistent look">Social graphics</button>
+      </div>
+    </form>
+  </header>
+  <dialog class="route-dialog" id="route-dialog" aria-label="Your creative route">
+    <button class="route-close" id="route-close" type="button" aria-label="Close creative route">×</button>
+    <div class="route-thinking" id="route-thinking" role="status" aria-live="polite" hidden>
+      <div class="crystal-scene" aria-hidden="true"><div class="crystal-orb"></div><div class="crystal-neck"></div><div class="crystal-base"></div><span class="spark one">✳</span><span class="spark two">✳</span><span class="spark three">✳</span></div>
+      <p class="thinking-title">Shuffling the cards…</p>
+      <p class="thinking-note">Finding a platform and models for your brief.</p>
+    </div>
+  <section class="recommendations" id="recommendations" aria-labelledby="recommendation-title" hidden>
+    <h2 class="rec-heading" id="recommendation-title" aria-label="Your creative route" tabindex="-1"><img src="assets/headlines/your-creative-route.png" alt=""></h2>
+    <p class="rec-eyebrow">A starting point for your brief</p>
+    <h3 class="rec-name" id="rec-name" aria-live="polite"></h3>
+    <p class="rec-summary" id="rec-summary"></p>
+    <p class="rec-brief" id="rec-brief"></p>
+    <a class="rec-platform-link" id="rec-platform-link" href="#" target="_blank" rel="noopener noreferrer"></a>
+    <div class="rec-card-grid" id="rec-cards"></div>
+    <ol class="rec-steps" id="rec-steps"></ol>
+    <div class="rec-foot">
+      <p>Flip the cards for more detail. Model cards are creative picks; you can use them separately and bring the results into the suggested platform. Availability varies by plan.</p>
+      <a class="rec-all" href="#deck">Explore the full deck</a>
+      <button class="rec-refine" id="rec-refine" type="button">Refine your brief</button>
+    </div>
+  </section>
+  </dialog>
+  <main class="wrap" id="deck"></main>
+  <section class="comparison wrap" id="comparison" aria-labelledby="comparison-title">
+    <p class="compare-eyebrow">A closer look</p>
+    <h2 id="comparison-title">Compare the cards</h2>
+    <p class="compare-intro">Drag two cards here to see them side by side. You can also use “Add to compare” under any card or choose from the menus below. Flip each card to read its back.</p>
+    <div class="compare-board">
+      <div class="compare-slot" data-slot="0">
+        <div class="compare-slot-head"><strong>Card one</strong><button class="compare-clear" type="button" hidden>Remove card</button></div>
+        <div class="compare-empty"><span>Drop your first card here ✳</span></div>
+        <div class="compare-content" hidden></div>
+        <label class="compare-select-label" for="compare-select-0">Or choose a card</label><select class="compare-select" id="compare-select-0"><option value="">Choose a card…</option></select>
+      </div>
+      <div class="compare-slot" data-slot="1">
+        <div class="compare-slot-head"><strong>Card two</strong><button class="compare-clear" type="button" hidden>Remove card</button></div>
+        <div class="compare-empty"><span>Drop your second card here ✳</span></div>
+        <div class="compare-content" hidden></div>
+        <label class="compare-select-label" for="compare-select-1">Or choose a card</label><select class="compare-select" id="compare-select-1"><option value="">Choose a card…</option></select>
+      </div>
+    </div>
+    <p class="sr-only" id="compare-status" role="status" aria-live="polite"></p>
+  </section>
+  <footer class="wrap">Made for curious designers and creative teams.</footer>
+  <script>
+    const groups = [
+      { title: 'Writing & coding', cards: [
+        ['01-gpt-6-astra','GPT-6 Astra'], ['02-gpt-6-sol','GPT-6 Sol'], ['03-gpt-6-luna','GPT-6 Luna'],
+        ['04-claude-opus-5-5','Claude Opus 5.5'], ['05-claude-sonnet-5','Claude Sonnet 5'], ['06-claude-haiku-4-5','Claude Haiku 4.5'],
+        ['07-gemini-3-1-pro','Gemini 3.1 Pro'], ['08-gemini-3-8-flash','Gemini 3.8 Flash']
+      ]},
+      { title: 'Image Generation', cards: [
+        ['09-midjourney','Midjourney'], ['10-chatgpt-images-2-5','ChatGPT Images 2.5'], ['11-gpt-image-2-5-sunburst','GPT-Image 2.5 Sunburst'],
+        ['12-gpt-image-2-5-flare','GPT-Image 2.5 Flare'], ['13-nano-banana-pro','Nano Banana Pro'], ['14-nano-banana-2','Nano Banana 2'],
+        ['15-nano-banana-2-lite','Nano Banana 2 Lite'], ['16-flux-2-pro','FLUX.2 Pro']
+      ]},
+      { title: 'Video Generation', cards: [
+        ['17-seedance-2-5','Seedance 2.5'], ['18-veo-3-1','Veo 3.1'], ['19-runway-gen-4-5','Runway Gen-4.5'],
+        ['20-kling-3-0-pro','Kling 3.0 Pro'], ['21-luma-ray3-2','Luma Ray3.2']
+      ]}
+    ];
+    const cardCopy = {"01-gpt-6-astra":"Great for Complex creative strategy, Polished sites and tools, and Multi-step workflows. Use when: The brief is ambitious, messy, or needs both ideas and execution.","02-gpt-6-sol":"Great for Responsive websites, Design-system code, and Everyday creative research. Use when: You need capable work at a sensible cost.","03-gpt-6-luna":"Great for Copy variations, Asset tagging, and Simple repeated tasks. Use when: You need many fast first passes.","04-claude-opus-5-5":"Great for Complex websites, Large code changes, and Nuanced creative reasoning. Use when: The project spans many files or decisions.","05-claude-sonnet-5":"Great for Interactive prototypes, Everyday coding, and Thoughtful editing. Use when: You want strong work without the premium tier.","06-claude-haiku-4-5":"Great for Microcopy, Quick summaries, and Light automation. Use when: Speed matters more than deep reasoning.","07-gemini-3-1-pro":"Great for Mixed-media research, Prototype coding, and Visual reference analysis. Use when: The brief includes images, files, and code.","08-gemini-3-8-flash":"Great for Fast coding iterations, Asset analysis, and Repeatable workflows. Use when: You need quick, frequent creative runs.","09-midjourney":"Great for Moodboards, Editorial images, and Aesthetic exploration. Use when: You are searching for a visual direction.","10-chatgpt-images-2-5":"Great for Conversational edits, Social assets, and Product concepts. Use when: You want to refine an image by talking through changes.","11-gpt-image-2-5-sunburst":"Great for Precise image edits, Subject preservation, and Final visual assets. Use when: Every detail in the edit matters.","12-gpt-image-2-5-flare":"Great for Fast image drafts, Everyday image edits, and Concept iteration. Use when: You want to explore quickly without losing quality.","13-nano-banana-pro":"Great for Readable text, Complex layouts, and Brand-consistent visuals. Use when: The image must carry specific words or details.","14-nano-banana-2":"Great for Social graphics, Reference-based edits, and Visual variations. Use when: You need a versatile image workhorse.","15-nano-banana-2-lite":"Great for Cheap image drafts, Bulk exploration, and Quick concepts. Use when: You are testing many directions.","16-flux-2-pro":"Great for Realistic products, Campaign concepts, and Multi-reference edits. Use when: The asset needs polish and consistency.","17-seedance-2-5":"Great for Directed sequences, Reference-led video, and Sound and motion. Use when: Your story needs more than a single shot.","18-veo-3-1":"Great for Cinematic scenes, Native audio, and Hero footage. Use when: The short clip needs visual impact and sound.","19-runway-gen-4-5":"Great for Camera movement, Image-to-video, and Polished short shots. Use when: Motion and framing carry the idea.","20-kling-3-0-pro":"Great for Multi-shot clips, Recurring characters, and Narrative continuity. Use when: Your characters must stay recognizable.","21-luma-ray3-2":"Great for Keyframe control, Video reframing, and Production variants. Use when: The clip needs precise framing or reuse."};
+    const deck = document.getElementById('deck');
+    for (const group of groups) {
+      const section = document.createElement('section'); section.className = 'group';
+      const heading = document.createElement('div'); heading.className = 'group-head';
+      const h2 = document.createElement('h2'); h2.setAttribute('aria-label', group.title);
+      const headingImg = document.createElement('img'); headingImg.src = `assets/headlines/${group.title === 'Writing & coding' ? 'writing-coding' : group.title.toLowerCase().replaceAll(' ','-')}.png`; headingImg.alt = '';
+      h2.append(headingImg);
+      heading.append(h2); section.append(heading);
+      const grid = document.createElement('div'); grid.className = 'grid';
+      for (const [slug, label] of group.cards) {
+        const card = document.createElement('button'); card.className = 'tarot-card'; card.type = 'button';
+        card.draggable = true;
+        card.dataset.slug = slug;
+        card.setAttribute('aria-label', `${label}. ${cardCopy[slug]} Press to flip.`);
+        card.setAttribute('aria-pressed','false');
+        const inner = document.createElement('span'); inner.className = 'card-inner';
+        const front = document.createElement('span'); front.className = 'card-face face-front';
+        const back = document.createElement('span'); back.className = 'card-face face-back';
+        const frontImg = document.createElement('img'); frontImg.src = `assets/fronts/${slug}.jpg`; frontImg.alt = `${label} tarot card front`; frontImg.loading = 'lazy'; frontImg.decoding = 'async';
+        const backImg = document.createElement('img'); backImg.src = `assets/backs/${slug}.jpg`; backImg.alt = `${label}. ${cardCopy[slug]}`; backImg.loading = 'lazy'; backImg.decoding = 'async';
+        front.append(frontImg); back.append(backImg); inner.append(front,back); card.append(inner);
+        const item = document.createElement('div'); item.className = 'deck-card-item';
+        const add = document.createElement('button'); add.className = 'compare-add'; add.type = 'button'; add.textContent = '＋ Add to compare'; add.setAttribute('aria-label',`Add ${label} to comparison`);
+        item.append(card,add); grid.append(item);
+        card.addEventListener('click', () => card.setAttribute('aria-pressed', card.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'));
+      }
+      section.append(grid); deck.append(section);
+    }
+    const platforms = [
+      { name:'Flora', logo:'flora.png', tone:'green', title:'THE GARDEN', archetype:'garden', url:'flora.ai',
+        about:'An open canvas that connects text, image, video and audio models into visual workflows.',
+        models:'Nano Banana 2 · FLUX.2 · Seedance 2.5 · Veo 3.1',
+        when:'Compare directions side by side, then scale one idea into a campaign.' },
+      { name:'Figma', logo:'figma.png', tone:'purple', title:'THE CANVAS', archetype:'canvas', url:'figma.com',
+        about:'Design files with AI image generation and editing directly in your layouts.',
+        models:'ChatGPT Images 2.0 · Nano Banana · Nano Banana 2 Lite · Nano Banana 2',
+        when:'Your image needs to land inside an editable design or social layout.' },
+      { name:'Figma Weave', logo:'weave.svg', tone:'cream', title:'THE LOOM', archetype:'loom', url:'weave.figma.com',
+        about:'A separate, node-based studio for building reusable media workflows and compositing.',
+        models:'Nano Banana · GPT Image · Kling V3 · Seedance 2.5',
+        when:'You need repeatable, multi-step image and video production.' },
+      { name:'Gamma', logo:'gamma-supplied.png', tone:'purple', title:'THE STORYTELLER', archetype:'storyteller', url:'gamma.app',
+        about:'An AI workspace for presentations, pages and social assets with a choice of image engines.',
+        models:'GPT Image · FLUX Kontext Max · Imagen 4 · Ideogram 3',
+        when:'The visual belongs in a finished deck, document or social asset.' },
+      { name:'fal', logo:'fal.png', tone:'green', title:'THE ENGINE', archetype:'engine', url:'fal.ai',
+        about:'A model playground, agent and API for hands-on creative generation and custom tools.',
+        models:'GPT Image 2.5 · FLUX.2 · Nano Banana 2 · Seedance 2.5 · Veo 3.1',
+        when:'You want deeper control, automation or your own creative app.' },
+      { name:'Runway', logo:'runway.png', tone:'cream', title:'THE DIRECTOR', archetype:'director', url:'runwayml.com',
+        about:'A production studio for generating and editing video and images.',
+        models:'Gen-4.5 · Aleph 2.0 · Veo 3.1 · Seedance 2.5 · Nano Banana 2',
+        when:'Motion, camera choices and polished footage lead the brief.' }
+    ];
+    const platformSection = document.createElement('section'); platformSection.className = 'group';
+    const platformHeading = document.createElement('div'); platformHeading.className = 'group-head';
+    const platformH2 = document.createElement('h2'); platformH2.setAttribute('aria-label','Platforms to explore');
+    platformH2.innerHTML = '<img src="assets/headlines/platforms-to-explore.png" alt="">';
+    platformHeading.append(platformH2); platformSection.append(platformHeading);
+    const platformGrid = document.createElement('div'); platformGrid.className = 'grid platform-grid';
+    for (const platform of platforms) {
+      const card = document.createElement('button'); card.className = 'tarot-card'; card.type = 'button';
+      card.draggable = true;
+      card.dataset.platform = platform.name.toLowerCase().replaceAll(' ','-');
+      card.setAttribute('aria-label', `${platform.name}. ${platform.about} Models include ${platform.models}. Best when: ${platform.when} Press to flip.`);
+      card.setAttribute('aria-pressed','false');
+      const inner = document.createElement('span'); inner.className = 'card-inner';
+      const front = document.createElement('span'); front.className = `card-face face-front platform-front tone-${platform.tone}`;
+      const back = document.createElement('span'); back.className = `card-face face-back platform-back tone-${platform.tone}`;
+      front.innerHTML = `<span class="platform-title"><img src="assets/headlines/platform-${platform.name.toLowerCase().replaceAll(' ','-')}.png" alt=""></span><span class="platform-cut"></span><span class="platform-gridpaper"></span><span class="platform-disc"></span><span class="platform-logo-sticker"><img src="assets/logos/${platform.logo}" alt=""></span><span class="platform-spark one">✳</span><span class="platform-spark two">✳</span><span class="platform-front-label"><img src="assets/headlines/archetype-${platform.archetype}.png" alt=""></span>`;
+      back.innerHTML = `<span class="platform-back-top"><img src="assets/logos/${platform.logo}" alt=""><strong>${platform.name}</strong></span><span class="platform-back-tag">The place</span><span class="platform-back-copy">${platform.about}</span><span class="platform-back-tag">Models to try</span><span class="platform-back-models">${platform.models}</span><span class="platform-back-when"><strong>Use when:</strong> ${platform.when}</span><span class="platform-back-url">${platform.url}</span>`;
+      inner.append(front,back); card.append(inner);
+      const item = document.createElement('div'); item.className = 'deck-card-item';
+      const add = document.createElement('button'); add.className = 'compare-add'; add.type = 'button'; add.textContent = '＋ Add to compare'; add.setAttribute('aria-label',`Add ${platform.name} to comparison`);
+      item.append(card,add); platformGrid.append(item);
+      card.addEventListener('click', () => card.setAttribute('aria-pressed', card.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'));
+    }
+    platformSection.append(platformGrid);
+    const note = document.createElement('p'); note.className = 'platform-note'; note.textContent = 'Model menus change and may vary by plan. Check each platform before you begin a project.';
+    const links = document.createElement('p'); links.className = 'platform-links';
+    for (const platform of platforms) {
+      const link = document.createElement('a'); link.href = `https://${platform.url}`; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = `${platform.name} ↗`;
+      links.append(link);
+    }
+    platformSection.append(note,links); deck.append(platformSection);
+    const compareSlots = [...document.querySelectorAll('.compare-slot')];
+    const compareChoices = new Map();
+    const compareSelections = [null,null];
+    for (const group of groups) for (const [slug,label] of group.cards) compareChoices.set(`model:${slug}`,{label,description:cardCopy[slug],selector:`[data-slug="${slug}"]`});
+    for (const platform of platforms) {
+      const slug = platform.name.toLowerCase().replaceAll(' ','-');
+      compareChoices.set(`platform:${slug}`,{label:platform.name,description:`${platform.about} Models to try: ${platform.models}. Use when: ${platform.when}`,selector:`[data-platform="${slug}"]`});
+    }
+    function cardKey(card) { return card.dataset.slug ? `model:${card.dataset.slug}` : card.dataset.platform ? `platform:${card.dataset.platform}` : null; }
+    function renderCompareSlot(index) {
+      const slot = compareSlots[index];
+      const key = compareSelections[index];
+      const content = slot.querySelector('.compare-content');
+      const empty = slot.querySelector('.compare-empty');
+      const clear = slot.querySelector('.compare-clear');
+      slot.querySelector('.compare-select').value = key || '';
+      content.replaceChildren();
+      empty.hidden = !!key; content.hidden = !key; clear.hidden = !key;
+      if (!key) return;
+      const choice = compareChoices.get(key);
+      const source = deck.querySelector(choice.selector);
+      const card = source.cloneNode(true);
+      card.setAttribute('aria-pressed','false');
+      card.querySelectorAll('img').forEach(img => img.loading = 'eager');
+      card.addEventListener('click', () => card.setAttribute('aria-pressed',card.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'));
+      const detail = document.createElement('div'); detail.className = 'compare-detail';
+      const heading = document.createElement('h3'); heading.textContent = choice.label;
+      const copy = document.createElement('p'); copy.textContent = choice.description;
+      detail.append(heading,copy); content.append(card,detail);
+    }
+    function chooseCompare(index,key,scroll = false) {
+      if (key && !compareChoices.has(key)) return;
+      if (key) {
+        const other = 1 - index;
+        if (compareSelections[other] === key) { compareSelections[other] = null; renderCompareSlot(other); }
+      }
+      compareSelections[index] = key || null;
+      renderCompareSlot(index);
+      document.getElementById('compare-status').textContent = key ? `${compareChoices.get(key).label} added to card ${index + 1}.` : `Card ${index + 1} removed.`;
+      if (scroll) document.getElementById('comparison').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',block:'start'});
+    }
+    for (const [index,slot] of compareSlots.entries()) {
+      const select = slot.querySelector('.compare-select');
+      for (const group of groups) {
+        const options = document.createElement('optgroup'); options.label = group.title;
+        for (const [slug,label] of group.cards) { const option = document.createElement('option'); option.value = `model:${slug}`; option.textContent = label; options.append(option); }
+        select.append(options);
+      }
+      const platformOptions = document.createElement('optgroup'); platformOptions.label = 'Platforms';
+      for (const platform of platforms) { const option = document.createElement('option'); option.value = `platform:${platform.name.toLowerCase().replaceAll(' ','-')}`; option.textContent = platform.name; platformOptions.append(option); }
+      select.append(platformOptions);
+      select.addEventListener('change', () => chooseCompare(index,select.value));
+      slot.querySelector('.compare-clear').addEventListener('click', () => chooseCompare(index,null));
+      slot.addEventListener('dragover',event => { event.preventDefault(); event.dataTransfer.dropEffect = 'copy'; slot.classList.add('is-over'); });
+      slot.addEventListener('dragleave',event => { if (!slot.contains(event.relatedTarget)) slot.classList.remove('is-over'); });
+      slot.addEventListener('drop',event => { event.preventDefault(); slot.classList.remove('is-over'); chooseCompare(index,event.dataTransfer.getData('text/plain')); });
+    }
+    document.addEventListener('dragstart',event => {
+      const card = event.target.closest?.('.tarot-card');
+      const key = card && cardKey(card);
+      if (!key) return;
+      event.dataTransfer.setData('text/plain',key);
+      event.dataTransfer.effectAllowed = 'copy';
+      card.classList.add('is-dragging');
+    });
+    document.addEventListener('dragend',event => { event.target.closest?.('.tarot-card')?.classList.remove('is-dragging'); compareSlots.forEach(slot => slot.classList.remove('is-over')); });
+    deck.addEventListener('click',event => {
+      const add = event.target.closest('.compare-add');
+      if (!add) return;
+      const key = cardKey(add.closest('.deck-card-item').querySelector('.tarot-card'));
+      const index = compareSelections[0] === null ? 0 : compareSelections[1] === null ? 1 : 1;
+      chooseCompare(index,key,index === 1);
+    });
+    const routes = {
+      automation: {
+        headline:'Build a creative tool with fal', platform:'fal', models:['02-gpt-6-sol','16-flux-2-pro'],
+        summary:'fal gives you a place to test image and video models before wiring them into a custom workflow. Pair it with a coding model for the interface and integration.',
+        steps:['Write down the input, output and repeatable steps your tool needs. Prototype one generation in fal first.','Use GPT-6 Sol to build the interface and connect it to the selected fal model. Try FLUX.2 Pro for polished image output.','Test a small batch with real briefs, compare cost and quality, then add controls for the settings people actually use.']
+      },
+      presentation: {
+        headline:'Shape the story in Gamma', platform:'Gamma', models:['01-gpt-6-astra','13-nano-banana-pro'],
+        summary:'Gamma is the fastest route from a rough narrative to a designed presentation. Use a strong reasoning model to sharpen the story and an image model for the key visuals.',
+        steps:['Draft the audience, promise and five to eight story beats with GPT-6 Astra.','Build the deck in Gamma. Generate imagery there, or bring in visuals made with Nano Banana Pro when text and precise details matter.','Review every slide at presentation size, simplify crowded frames and export the version you will share.']
+      },
+      videoStory: {
+        headline:'Direct a short film in Flora', platform:'Flora', models:['17-seedance-2-5','18-veo-3-1'],
+        summary:'Start with a shot plan, then compare Seedance for directed sequences with Veo for cinematic footage and sound on Flora’s canvas.',
+        steps:['Write a brief shot list with the subject, action, camera move and sound for each beat.','In Flora, try Seedance 2.5 for multi-shot direction and Veo 3.1 for a cinematic alternative. Keep the best references consistent.','Compare the strongest clips and audio in Flora, then assemble and export the final sequence for your channel.']
+      },
+      videoCharacter: {
+        headline:'Keep the cast consistent in Flora', platform:'Flora', models:['20-kling-3-0-pro','17-seedance-2-5'],
+        summary:'For a recurring subject or character, start with clear references and compare models in one canvas before you commit to the full sequence.',
+        steps:['Create a reference sheet for each character with face, wardrobe and setting details.','Try Kling 3.0 Pro for continuity and Seedance 2.5 for directed sequences with sound. Keep the same references across shots.','Review every cut for identity drift, then assemble the strongest clips into your final story.']
+      },
+      videoEdit: {
+        headline:'Reshape the footage in Runway', platform:'Runway', models:['19-runway-gen-4-5','21-luma-ray3-2'],
+        summary:'Use Runway as the editing space. The cards point to models worth testing when you need a new shot or more control over framing.',
+        steps:['Import the best source clip and mark exactly what should change or stay fixed.','Try Runway Gen-4.5 for a replacement shot and Luma Ray3.2 when keyframes or reframing are the main challenge.','Compare against the original, match color and timing, then export the revised cut.']
+      },
+      video: {
+        headline:'Make the motion in Runway', platform:'Runway', models:['19-runway-gen-4-5','17-seedance-2-5'],
+        summary:'Runway puts video generation and editing in one workspace. Compare a polished Gen-4.5 shot with a more directed Seedance sequence.',
+        steps:['Choose a strong starting frame and describe the movement, camera and duration.','Generate one shot with Runway Gen-4.5 and another with Seedance 2.5. Compare motion and prompt fidelity.','Edit the chosen shot in Runway, refine the timing and export versions for your intended format.']
+      },
+      textVisual: {
+        headline:'Keep the words sharp in Figma Weave', platform:'Figma Weave', models:['13-nano-banana-pro','10-chatgpt-images-2-5'],
+        summary:'For visuals with exact copy, use a model that handles lettering well, then compose and refine the result in a flexible design workflow.',
+        steps:['Write the exact words, hierarchy and aspect ratio before generating anything.','Test Nano Banana Pro for text-heavy artwork and ChatGPT Images 2.5 for a second direction. Check every letter.','Use Figma Weave to refine the image, then place final editable copy over it in your design file where precision matters.']
+      },
+      imageEdit: {
+        headline:'Refine the image in Figma Weave', platform:'Figma Weave', models:['10-chatgpt-images-2-5','11-gpt-image-2-5-sunburst'],
+        summary:'Weave is useful when a visual needs several controlled passes rather than one fresh generation.',
+        steps:['Start with the highest-quality source and list what must remain unchanged.','Try ChatGPT Images 2.5 for conversational edits; use Sunburst when preserving details is the priority.','Compare each revision at full size in Weave, then finish the crop, color and compositing.']
+      },
+      product: {
+        headline:'Explore campaign directions in Flora', platform:'Flora', models:['16-flux-2-pro','13-nano-banana-pro'],
+        summary:'Flora makes it easy to branch a concept into multiple product or campaign directions and compare them on one canvas.',
+        steps:['Upload the product and brand references, then define lighting, setting and what must stay accurate.','Try FLUX.2 Pro for polished realism and Nano Banana Pro for complex reference-led compositions.','Pick a direction in Flora, build a consistent set of crops and check product details before publishing.']
+      },
+      logo: {
+        headline:'Explore the mark in Figma', platform:'Figma', models:['13-nano-banana-pro','10-chatgpt-images-2-5'],
+        summary:'Use image models to open up directions, then refine the chosen mark as an editable design in Figma.',
+        steps:['Define the name, personality and where the mark must work, especially at small sizes.','Use Nano Banana Pro and ChatGPT Images 2.5 for distinct concept directions. Treat their output as exploration.','Rebuild the strongest idea as editable vector artwork in Figma, test it in one color and check its originality.']
+      },
+      social: {
+        headline:'Design the series in Figma', platform:'Figma', models:['14-nano-banana-2','13-nano-banana-pro'],
+        summary:'Figma keeps a social series editable and consistent. Use image models for visual options, then control the final type and layout in frames.',
+        steps:['Set up a reusable frame for each format and establish type, color and safe areas.','Generate visual directions with Nano Banana 2. Try Nano Banana Pro for a more detailed hero asset.','Place the chosen art in Figma, keep important words as editable text and export the full set.']
+      },
+      website: {
+        headline:'Design in Figma, build with a coding model', platform:'Figma', models:['02-gpt-6-sol','05-claude-sonnet-5'],
+        summary:'Use Figma to make the layout and interactions concrete, then choose a coding model to turn that direction into a working page or prototype.',
+        steps:['Sketch the key screens, components and states in Figma. Write down what should happen on click or hover.','Give the design and requirements to GPT-6 Sol or Claude Sonnet 5 to build a first working version.','Review the live page on desktop and mobile, then iterate on spacing, accessibility and real content.']
+      },
+      moodboard: {
+        headline:'Find the visual direction in Flora', platform:'Flora', models:['09-midjourney','16-flux-2-pro'],
+        summary:'Flora is a good canvas for comparing directions. Midjourney is strong for aesthetic exploration; FLUX.2 Pro helps turn the winning idea into more consistent imagery.',
+        steps:['Gather a few visual references and name the mood, subject and visual rules.','Explore broad looks in Midjourney, then compare your favorites with FLUX.2 Pro on the Flora canvas.','Save the strongest references and write a short visual brief before producing final assets.']
+      },
+      writing: {
+        headline:'Develop the story, then package it in Gamma', platform:'Gamma', models:['01-gpt-6-astra','05-claude-sonnet-5'],
+        summary:'Use GPT-6 Astra to find the angle, write and refine the draft. Claude Sonnet 5 can offer a second editorial perspective. Gamma can then turn the finished idea into a shareable document or presentation.',
+        steps:['Give GPT-6 Astra the audience, point of view and source material to outline the story.','Ask GPT-6 Astra to draft and revise for clarity, voice and structure. Use Claude Sonnet 5 only if you want a second editorial pass; verify every claim.','Bring the final copy into Gamma if you need a designed document, deck or companion visual.']
+      },
+      image: {
+        headline:'Compare image directions in Flora', platform:'Flora', models:['14-nano-banana-2','16-flux-2-pro'],
+        summary:'Flora lets you compare versatile image ideas on one canvas, then develop the strongest option into a more polished asset.',
+        steps:['Describe the subject, style, aspect ratio and where the image will be used.','Try Nano Banana 2 for fast directions and FLUX.2 Pro for a more polished alternative.','Choose one result, refine the details and export the crops you need.']
+      },
+      general: {
+        headline:'Start exploring in Flora', platform:'Flora', models:['01-gpt-6-astra','14-nano-banana-2'],
+        summary:'Your brief could go a few directions. Flora lets you develop the idea and compare visual outputs while you decide what to make first.',
+        steps:['Define the audience, format and one thing the finished piece must achieve.','Use GPT-6 Astra to shape two or three concepts, then test a visual direction with Nano Banana 2 in Flora.','Choose the strongest concept and add format or style details to this brief for a more focused route.']
+      }
+    };
+    function chooseRoute(brief) {
+      const q = brief.toLowerCase();
+      if (/\b(api|integrat(?:e|ion)|automati(?:on|c|ze)|pipeline|build (?:a |my )?(?:tool|generator)|batch generat)/.test(q)) return routes.automation;
+      if (/\b(presentation|slide|slideshow|pitch deck|investor deck|keynote)\b/.test(q)) return routes.presentation;
+      if (/\b(website|webpage|web app|landing page|dashboard|interactive prototype)\b/.test(q) && !/\b(videos?|films?|clips?|reels?)\b/.test(q)) return routes.website;
+      if (/\b(videos?|films?|clips?|reels?|animations?|animate|motion|trailers?|commercials?|ad spot)\b/.test(q)) {
+        if (/\b(character|cast|same person|consistent person|continuity|recurring)\b/.test(q)) return routes.videoCharacter;
+        if (/\b(edit|reframe|restyle|change existing|existing footage|existing video|source clip)\b/.test(q)) return routes.videoEdit;
+        return /\b(sound|audio|voice|music|dialogue|narrative|story|multi.?shot|30.?second|cinematic)\b/.test(q) ? routes.videoStory : routes.video;
+      }
+      if (/\b(typograph|lettering|text.?heavy|exact text|precise text|words (?:in|on) (?:the )?image|text (?:in|on) (?:the )?(?:image|graphic))/.test(q)) return routes.textVisual;
+      if (/\b(edit|retouch|remove background|replace background|inpaint|outpaint|composit|manipulat|restore|photo edit)/.test(q)) return routes.imageEdit;
+      if (/\b(logo|wordmark|visual identity|brand identity|brand mark)\b/.test(q)) return routes.logo;
+      if (/\b(product photo|product image|packag|fashion|lookbook|campaign|e.?commerce|photoshoot|advertis)/.test(q)) return routes.product;
+      if (/\b(social|instagram|linkedin|carousel|poster|graphic|thumbnail|infographic)\b/.test(q)) return routes.social;
+      if (/\b(website|webpage|web app|landing page|app|prototype|interface|ui|design system|code|coding|dashboard)\b/.test(q)) return routes.website;
+      if (/\b(moodboard|mood board|art direction|visual direction|editorial image|concept art|inspiration)\b/.test(q)) return routes.moodboard;
+      if (/\b(article|blog|essay|copywriting|write|writing|newsletter|script|story)\b/.test(q)) return routes.writing;
+      if (/\b(image|photo|illustration|visual|artwork|render|portrait|picture)\b/.test(q)) return routes.image;
+      return routes.general;
+    }
+    const briefForm = document.getElementById('brief-form');
+    const briefInput = document.getElementById('brief-input');
+    const routeDialog = document.getElementById('route-dialog');
+    const routeThinking = document.getElementById('route-thinking');
+    const recommendationSection = document.getElementById('recommendations');
+    let routeTimer;
+    let returnFocus;
+    function renderRoute(brief) {
+      const route = chooseRoute(brief);
+      const platform = platforms.find(item => item.name === route.platform);
+      document.getElementById('rec-name').textContent = route.headline;
+      document.getElementById('rec-summary').textContent = route.summary;
+      document.getElementById('rec-brief').textContent = `Your brief: “${brief}”`;
+      const platformLink = document.getElementById('rec-platform-link');
+      platformLink.href = `https://${platform.url}`;
+      platformLink.textContent = `Explore ${platform.name} ↗`;
+      const cards = document.getElementById('rec-cards'); cards.replaceChildren();
+      const picks = [
+        { label:'Your platform', selector:`[data-platform="${platform.name.toLowerCase().replaceAll(' ','-')}"]` },
+        ...route.models.map((slug,index) => ({ label:index === 0 ? 'Model to start with' : 'Another model to try', selector:`[data-slug="${slug}"]` }))
+      ];
+      for (const pick of picks) {
+        const source = deck.querySelector(pick.selector);
+        if (!source) continue;
+        const wrapper = document.createElement('div');
+        const label = document.createElement('span'); label.className = 'rec-card-label'; label.textContent = pick.label;
+        const card = source.cloneNode(true); card.setAttribute('aria-pressed','false');
+        card.querySelectorAll('img').forEach(img => img.loading = 'eager');
+        card.addEventListener('click', () => card.setAttribute('aria-pressed', card.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'));
+        const add = document.createElement('button'); add.className = 'compare-add'; add.type = 'button'; add.textContent = '＋ Add to compare'; add.setAttribute('aria-label',`Add ${compareChoices.get(cardKey(card)).label} to comparison`);
+        add.addEventListener('click', () => {
+          const index = compareSelections[0] === null ? 0 : 1;
+          chooseCompare(index,cardKey(card));
+          if (index === 1) {
+            routeDialog.close();
+            document.getElementById('comparison').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',block:'start'});
+          }
+        });
+        wrapper.append(label,card,add); cards.append(wrapper);
+      }
+      const steps = document.getElementById('rec-steps'); steps.replaceChildren();
+      route.steps.forEach((instruction,index) => {
+        const step = document.createElement('li');
+        const number = document.createElement('span'); number.className = 'step-number'; number.textContent = `STEP ${index + 1}`;
+        step.append(number,document.createTextNode(instruction)); steps.append(step);
+      });
+    }
+    function openRoute(brief) {
+      clearTimeout(routeTimer);
+      returnFocus = document.activeElement;
+      recommendationSection.hidden = true;
+      routeThinking.hidden = false;
+      routeDialog.scrollTop = 0;
+      if (!routeDialog.open) routeDialog.showModal();
+      document.body.classList.add('route-open');
+      document.getElementById('route-close').focus({preventScroll:true});
+      routeTimer = setTimeout(() => {
+        if (!routeDialog.open) return;
+        renderRoute(brief);
+        routeThinking.hidden = true;
+        recommendationSection.hidden = false;
+        routeDialog.scrollTop = 0;
+        document.getElementById('recommendation-title').focus({preventScroll:true});
+      }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 300 : 1100);
+    }
+    briefForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const brief = briefInput.value.trim();
+      if (brief) openRoute(brief);
+    });
+    document.querySelectorAll('[data-example]').forEach(button => button.addEventListener('click', () => {
+      briefInput.value = button.dataset.example;
+      briefForm.requestSubmit();
+    }));
+    document.getElementById('rec-refine').addEventListener('click', () => {
+      returnFocus = briefInput;
+      routeDialog.close();
+      briefInput.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',block:'center'});
+    });
+    document.getElementById('route-close').addEventListener('click', () => routeDialog.close());
+    routeDialog.addEventListener('click', event => {
+      const bounds = routeDialog.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) routeDialog.close();
+    });
+    routeDialog.addEventListener('close', () => {
+      clearTimeout(routeTimer);
+      document.body.classList.remove('route-open');
+      if (returnFocus?.isConnected) returnFocus.focus({preventScroll:true});
+    });
+    document.querySelector('.rec-all').addEventListener('click', event => {
+      event.preventDefault();
+      routeDialog.close();
+      document.getElementById('deck').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !routeDialog.open) document.querySelectorAll('.tarot-card[aria-pressed="true"]').forEach(card => card.setAttribute('aria-pressed','false'));
+    });
+  </script>
+</body>
+</html>
